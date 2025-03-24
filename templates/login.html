@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - Library Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <input type="radio" id="admin" name="userType" value="admin">
+                <label for="admin" style="display: inline;">Admin</label>
+                <input type="radio" id="student" name="userType" value="student" checked>
+                <label for="student" style="display: inline;">Student</label>
+            </div>
+            <button type="submit" class="button">Login</button>
+            <div id="error" class="error"></div>
+        </form>
+        <p>Don't have an account? <a href="/register.html">Register</a></p>
+        <p><a href="/">Back to Home</a></p>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const isAdmin = document.getElementById('admin').checked;
+            
+            fetch('/api/accounts/login/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    document.getElementById('error').textContent = data.error;
+                } else {
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('userId', data.user_id);
+                    localStorage.setItem('isAdmin', data.is_admin);
+                    
+                    if (data.is_admin && isAdmin) {
+                        window.location.href = '/admin_dashboard.html';
+                    } else if (!data.is_admin && !isAdmin) {
+                        window.location.href = '/student_dashboard.html';
+                    } else {
+                        document.getElementById('error').textContent = 'Selected role does not match your account type.';
+                    }
+                }
+            })
+            .catch(error => {
+                document.getElementById('error').textContent = 'An error occurred. Please try again.';
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
