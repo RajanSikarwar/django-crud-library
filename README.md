@@ -139,7 +139,7 @@ The system uses Token-based authentication with Django REST Framework.
 
 ## Contact
 
-Name - rajansikarwar.ravindra@gmail.com
+Rajan Sikarwar - rajansikarwar.ravindra@gmail.com
 
 Project Link: [https://github.com/RajanSikarwar/django-crud-library.git](https://github.com/RajanSikarwar/django-crud-library.git)
 ```
