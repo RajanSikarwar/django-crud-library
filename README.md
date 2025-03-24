@@ -143,7 +143,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-Your Name - rajansikarwar.ravindra@gmail.com
+Name - rajansikarwar.ravindra@gmail.com
 
 Project Link: [https://github.com/RajanSikarwar/django-crud-library.git](https://github.com/RajanSikarwar/django-crud-library.git)
 ```
