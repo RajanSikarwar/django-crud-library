@@ -111,13 +111,6 @@ library_management/
 - **Student**:
   - View Available Books
 
-## API Endpoints
-
-- `/api/accounts/register/` - User Registration
-- `/api/accounts/login/` - User Login
-- `/api/accounts/logout/` - User Logout
-- `/api/books/` - Book Management
-
 ## Authentication
 
 The system uses Token-based authentication with Django REST Framework.
