@@ -1,5 +1,5 @@
 # Library Management System
-A comprehensive Django-based web application for managing library operations
+The Library Management System is a web-based application developed using Django and Django REST Framework with a MySQL database. It provides RESTful API endpoints that allow administrators to perform full CRUD operations on book records after registering and logging in with a unique email and password. Admins can add, view, update, and delete books securely through authenticated endpoints. Additionally, the system offers a student-facing API endpoint that allows anyone to view the list of available books without requiring authentication.
 
 ## Project Overview
 
